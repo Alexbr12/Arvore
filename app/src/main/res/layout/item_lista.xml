@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -20,16 +22,37 @@
             android:text="Unknown"
             android:textColor="@color/colorPrimaryDark"
             android:id="@+id/nome"/>
-        <View android:layout_width="0dp"
-            android:layout_weight="0.1"
-            android:layout_height="1dp"
-            android:id="@+id/espacamento"/>
+
+        <View
+            android:id="@+id/espacamento"
+            android:layout_width="108dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1" />
+
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/remove"
+            android:layout_width="51dp"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_launcher_background"
-            android:tint="@color/colorAccent"
-            android:id="@+id/remove"/>
+            android:tint="@color/colorAccent" />
+
+        <View
+            android:id="@+id/espacamento2"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.01" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/inserir"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/colorPrimary"
+            android:clickable="true"
+            android:src="@android:drawable/ic_input_add"
+            app:fabSize="auto"
+            app:rippleColor="@color/design_default_color_primary_dark" />
+
     </LinearLayout>
 
 
@@ -42,6 +65,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorPrimaryDark"/>
 
 </LinearLayout>

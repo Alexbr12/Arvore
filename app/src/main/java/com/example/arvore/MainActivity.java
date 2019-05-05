@@ -1,10 +1,18 @@
 package com.example.arvore;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recycleView;
     public List<No> no = new ArrayList<>();
     private NoAdapter adapter;
+    public String m_Text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,12 +126,39 @@ public class MainActivity extends AppCompatActivity {
             }
             delete(no.getNo(), id);
         }
-        //return true;
     }
 
-    private void inserir (List<No> raiz, String nome) {
+    public void inserir (List<No> raiz, String nome, int id) {
+        No noInsere = new No(55, nome, new ArrayList<No>());
 
-
+        for(int i = 0; i < raiz.size(); i++) {
+            No no = raiz.get(i);
+            if(no.getId() == id) {
+                //no.get(id).getNo().add(noInsere);
+                raiz.get(i).getNo().add(noInsere);
+                Log.i("INSERE", no.getNome());
+                adapter.notifyDataSetChanged();
+                //percorrerArvore(raiz);
+                return;
+            }
+            inserir(no.getNo(), nome, id);
+        }
     }
+
+    public boolean isVazio (List<No> raiz, int id) {
+        boolean resp = true;
+        for (int i = 0; i < raiz.size(); i++) {
+            No no = raiz.get(i);
+            if (no.getId() == id) {
+                //no.get(id).getNo().add(noInsere);
+                resp = raiz.get(i).getNo().isEmpty();
+                Log.i("INSERE", no.getNome());
+                //percorrerArvore(raiz);
+            }
+        }
+        return  resp;
+    }
+
+//    @Override
 
 }
