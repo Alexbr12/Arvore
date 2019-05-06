@@ -55,66 +55,11 @@ public class Conteudo extends AppCompatActivity {
             bundle.putString("nome", texto);
             bundle.putString("conteudo", conteudo);
             fragment.setArguments(bundle);
-            //fragment.setArguments();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, fragment)
                     .commitNow();
         }
-
-//        AddData();
-//        viewAll();
-//        deleteData();
     }
-
-//    private void AddData() {
-//        btnAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                boolean isInserted = myDB.insertData(txtConteudo.getText().toString());
-//                if (isInserted == true)
-//                    Toast.makeText(Conteudo.this, "Dados Inseridos.", Toast.LENGTH_LONG).show();
-//                else
-//                    Toast.makeText(Conteudo.this, "Falha na Inserção!", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//    }
-//
-//    private void viewAll () {
-//        btnViewAll.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Cursor res = myDB.getAllData();
-//                if (res.getCount() == 0) {
-//                    showMessage("Error", "Nenhum dado encontrado");
-//                    return;
-//                }
-//
-//                StringBuffer buffer = new StringBuffer();
-//                while (res.moveToNext()) {
-//                    buffer.append("Id: " + res.getString(0)+ "\n");
-//                    buffer.append("Texto: " + res.getString(1)+ "\n\n");
-//                    buffer.append("Email: " + res.getString(2)+ "\n\n");
-//                }
-//                showMessage("Data", buffer.toString());
-//            }
-//        });
-//    }
-//
-//    private void deleteData () {
-//        btnDelete.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Integer deleteRows = myDB.deleteData(txtId.getText().toString());
-//                        if(deleteRows > 0)
-//                            Toast.makeText(Conteudo.this, "Conteudo deletado", Toast.LENGTH_LONG).show();
-//                        else
-//                            Toast.makeText(Conteudo.this, "Conteudo não pode ser deletado", Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//        );
-//
-//    }
 
     private void showMessage (String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

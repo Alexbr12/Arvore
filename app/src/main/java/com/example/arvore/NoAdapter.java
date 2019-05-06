@@ -166,6 +166,9 @@ public class NoAdapter extends RecyclerView.Adapter<NoAdapter.ViewHolder> {
                 m_Text = input.getText().toString();
                // Toast.makeText(context, m_Text, Toast.LENGTH_LONG).show();
                 nos.get(position).setConteudo(m_Text);
+                ((MainActivity)context).dbHelper.updateData(nos.get(position).getId(),
+                        nos.get(position).getNome(), m_Text, nos.get(position).getIdPai());
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

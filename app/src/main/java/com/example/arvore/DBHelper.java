@@ -89,7 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public List<No> convertCursorToNos (Cursor cursor) {
         if(cursor.getCount() <= 0) {
-            return null;
+            return new ArrayList<>();
         }
 
         raiz = new ArrayList<>();

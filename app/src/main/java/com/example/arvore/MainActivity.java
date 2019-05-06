@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new DBHelper(this);
-        no.add(new No(-1, "1", new ArrayList<No>()));
+        //no.add(new No(-1, "1", new ArrayList<No>()));
 
 //        no.add(new No(1, "1", new ArrayList<No>()));
 //        {
@@ -93,6 +96,46 @@ public class MainActivity extends AppCompatActivity {
 //            no.get(4).getNo().add(no5);
 //        }
 
+        final Context context = this;
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Insira o Nome");
+
+// Set up the input
+                final EditText input = new EditText(context);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_TEXT ); //| InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                builder.setView(input);
+
+
+
+// Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        m_Text = input.getText().toString();
+                        //Toast.makeText(context, m_Text, Toast.LENGTH_LONG).show();
+                        //inserir(no, m_Text , -1);
+                        long result = dbHelper.insertData(m_Text, "conteudo", -1);
+                        if( result != -1)
+                            no.add(new No((int)result, m_Text, "conteudo", -1));
+
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+
+            }
+        });
+
         dbHelper.insertNos(no);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -138,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
             if(no.getId() == id) {
                 //no.get(id).getNo().add(noInsere);
                 No noInsere = new No(raiz.get(i).getId(), nome, new ArrayList<No>(), "Conteudo");
-                long result = dbHelper.insertData(noInsere.getNome(), noInsere.getConteudo(), noInsere.getIdPai());
+                long result = dbHelper.insertData(noInsere.getNome(), noInsere.getConteudo(), id);
                 if (result != -1) {
                     noInsere.setId((int)result);
                     raiz.get(i).getNo().add(noInsere);
